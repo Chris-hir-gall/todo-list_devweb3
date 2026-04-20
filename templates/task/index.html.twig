@@ -5,6 +5,8 @@
 {% block body %}
     <h1>liste de taches</h1>
 
+{{form(form)}}
+
     {% for task in tasks %}
         <div>
         <h2>{{task.title}}</h2>
