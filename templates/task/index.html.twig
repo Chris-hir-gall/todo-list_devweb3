@@ -5,15 +5,24 @@
 {% block body %}
     <h1>liste de taches</h1>
 
-{{form(form)}}
+    <div class="container">
 
-    {% for task in tasks %}
         <div>
-        <h2>{{task.title}}</h2>
-        <p>Fait: {{task.isDone ? 'OUI':'NON'}}</p>
-        <p>{{task.createAt | date('d/m/Y')}}</p>
-        <hr>
+            <h2>
+                ajouter une tache
+            </h2>
+            {{form(form)}}
         </div>
-    {% endfor %}
+
+    
+        {% for task in tasks %}
+            <div class="list">
+                <h2>{{task.title}}</h2>
+                <p>Fait: {{task.isDone ? 'OUI':'NON'}}</p>
+                <p>{{task.createAt | date('d/m/Y')}}</p>
+                <hr><br>
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}   

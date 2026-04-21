@@ -9,7 +9,9 @@
     <ul>
     {% for category in categories %}
         
-        <li> <a href="{{path('category_show', {id : category.id})}}">{{category.name}}</a></li>
+        <div>
+            <li><h2><a href="{{path('category_show', {id : category.id})}}">{{category.name}}</a></h2></li>
+        </div>
         
         
         

@@ -1,0 +1,60 @@
+body{
+    background-color: #f6f6f6;
+opacity: 1;
+    background-image:  linear-gradient(#43c5e6 2.8000000000000003px, transparent 2.8000000000000003px), linear-gradient(90deg, #43c5e6 2.8000000000000003px, transparent 2.8000000000000003px), linear-gradient(#43c5e6 1.4000000000000001px, transparent 1.4000000000000001px), linear-gradient(90deg, #43c5e6 1.4000000000000001px, #f6f6f6 1.4000000000000001px);
+    background-size: 70px 70px, 70px 70px, 14px 14px, 14px 14px;
+    background-position: -2.8000000000000003px -2.8000000000000003px, -2.8000000000000003px -2.8000000000000003px, -1.4000000000000001px -1.4000000000000001px, -1.4000000000000001px -1.4000000000000001px;
+    background-attachment: fixed;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+header, nav{
+    display: flex;
+    flex-direction: row;
+    background-color: aqua;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+nav a{
+    text-decoration: none;
+    color: black;
+}
+
+nav a:hover{
+    color: blue;
+}
+
+h1, h2, p {
+    background-color: white;
+
+}
+
+div{
+    width: 30%;
+    align-self: center;
+    text-align: center;
+    
+}
+
+.container{
+    width: 100%;
+    text-align: center;
+    align-self: center;
+    text-align: center;
+}
+
+.list{
+    margin: 10px;
+}
+
+.category_show{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+}
+

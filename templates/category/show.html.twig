@@ -3,11 +3,10 @@
 {% block title %}CATEGORY{% endblock %}
 
 {% block body %}
-    <h1>liste des Categories</h1>
-   
-        <li> {{category.name}}</li>
-        
-    <div>
+    <h1>Categorie</h1>
+  
+    <div class="category_show">
+        <h2><li> {{category.name}}</li></h2>
         <a href="{{path('category_edit', {id : category.id})}}">modifier</a>
     
         <form action="{{path('category_delete')}}" method="post"
