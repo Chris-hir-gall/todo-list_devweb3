@@ -4,20 +4,15 @@
 
 {% block body %}
     <h1>liste des Categories</h1>
-
-    <a href="{{path('category_new')}}">Creer une categorie</a>
-    <ul>
-    {% for category in categories %}
+   
+        <li> {{category.name}}</li>
         
-        <li><a href="{{path('category_show' , {id: category.id})}}">
-        {{'category.name'}}
-        </a></li>
-        
-        
-        
-        {% else %}
-            <h2>Pas encore de categorie</h2>
-
-    {% endfor %}
-    </ul>
+    <div>
+        <a href="{{path('category_edit', {id : category.id})}}">modifier</a>
+    
+        <form action="" method="post">
+            <button type="submit">efacer</button>
+        </form>
+    </div>
+    
 {% endblock %}

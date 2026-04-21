@@ -39,12 +39,29 @@ final class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/categories/show', name: 'category_show')]
-    public function show( $id): Response
+    #[Route('/categories/{id}', name: 'category_show')]
+    public function show( $id, CategoryRepository $repo): Response
     {
-        dd($id);
-       /* return $this->render('category/show.html.twig', [
-            'categories'=> $repo->find($id),
-        ]);*/
+        //dd($id);
+        return $this->render('category/show.html.twig', [
+            'category'=> $repo->find($id)
+        ]);
+    }
+
+    #[Route('/categories/{id}/edit', name: 'category_edit')]
+    public function edit( Category $cat, Request $request, EntityManagerInterface $em): Response
+    {
+        
+        //dd($cat);
+        $form = $this->createForm(CategoryType::class, $cat);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+                $em->flush();
+
+        return $this->redirectToRoute('category_index');
+       }
+         return $this->render('category/edit.html.twig', [
+                'form'=>$form
+         ]);
     }
 }
