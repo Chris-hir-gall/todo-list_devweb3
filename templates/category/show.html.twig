@@ -9,7 +9,9 @@
     <ul>
     {% for category in categories %}
         
-        <li> <a href="{{path('category_show', {id : category.id})}}">{{category.name}}</a></li>
+        <li><a href="{{path('category_show' , {id: category.id})}}">
+        {{'category.name'}}
+        </a></li>
         
         
         
@@ -18,4 +20,4 @@
 
     {% endfor %}
     </ul>
-{% endblock %}   
+{% endblock %}

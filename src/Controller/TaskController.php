@@ -21,7 +21,7 @@ final class TaskController extends AbstractController
        $form = $this->createForm(TaskType::class, $task);
        $form->handleRequest($request);
 
-       if($form->isSubmitted()){
+       if($form->isSubmitted() && $form->isValid()){
         $task->setIsDone(false);
         $task->setCreateAt(new \DateTimeImmutable());
         $em->persist($task);
