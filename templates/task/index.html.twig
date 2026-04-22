@@ -18,9 +18,10 @@
         {% for task in tasks %}
             <div class="list">
                 <h2>{{task.title}}</h2>
-                <form action="" method='post'>
+                <form action="/task/complete" method='post'>
                     <label for="">
-                        <input type="checkbox" name="isDone" id="">
+                        <input type="hidden" name="id" value="{{task.id}}">
+                        <input type="checkbox" name="isDone" id="" value="{{task.isDone}}" onchange="this.form.submit()">
                     </label>
                 </form>
                 <p>Fait: {{task.isDone ? 'OUI':'NON'}}</p>

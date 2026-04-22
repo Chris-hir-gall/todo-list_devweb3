@@ -35,4 +35,16 @@ final class TaskController extends AbstractController
             'form'=>$form
         ]);
     }
+
+    #[Route('/task/complete', name: 'task_complete')]
+    public function taskComplete(Request $request, TaskRepository $repo, EntityManagerInterface $em): Response
+{       $id = $request->getPayload()->get('id'); 
+        $request->getPayload()->get('isDone');
+
+       $task = $repo->find($id);
+       if($task == null){
+            throw $this->createNotFoundException();
+       }
+       dd($task);
+    }
 }
