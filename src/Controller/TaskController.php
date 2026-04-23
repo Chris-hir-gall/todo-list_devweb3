@@ -27,6 +27,7 @@ final class TaskController extends AbstractController
         $em->persist($task);
         $em->flush();
 
+        $this->addFlash('success','La tache a été ajoute avec succès.');
         return $this->redirectToRoute('app_task');
        }
 
@@ -45,6 +46,26 @@ final class TaskController extends AbstractController
        if($task == null){
             throw $this->createNotFoundException();
        }
-       dd($task);
+       $task->setIsDone(!$task->isDone());
+        $em->flush();
+
+        $this->addFlash('success','La tache a été completée avec succès.');
+        return $this->redirectToRoute('app_task');
+    }
+    #[Route('/tasks/delete', name: 'task_delete')]
+    public function delete(Request $request, TaskRepository $repo, EntityManagerInterface $em): Response
+    {
+        $id = $request->getPayload()->get('id');
+        $task = $repo->find($id);
+
+        if ($task === null) {
+            throw $this->createNotFoundException();
+        }
+
+        $em->remove($task);
+        $em->flush();
+
+        $this->addFlash('success','La categorie a été suprimée avec succès.');
+        return $this->redirectToRoute('app_task');
     }
 }

@@ -16,13 +16,21 @@
 
     
         {% for task in tasks %}
-            <div class="list">
+            <div class="list d-flex">
                 <h2>{{task.title}}</h2>
+                <h3>{{task.category.name}}</h3>
                 <form action="/task/complete" method='post'>
                     <label for="">
                         <input type="hidden" name="id" value="{{task.id}}">
                         <input type="checkbox" name="isDone" id="" value="{{task.isDone}}" onchange="this.form.submit()">
                     </label>
+                </form>
+                <form action="{{path('task_delete')}}" 
+                          method="POST"
+                          onsubmit="return confirm('Supprimer??')"
+                          >
+                        <input type="hidden" name="id" value="{{task.id}}">
+                        <button class="p-0 text-danger fs-3 btn"><i class="bi bi-trash-fill">suprimer</i></button>
                 </form>
                 <p>Fait: {{task.isDone ? 'OUI':'NON'}}</p>
                 <p>{{task.createAt | date('d/m/Y')}}</p>

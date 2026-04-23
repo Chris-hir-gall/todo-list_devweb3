@@ -32,6 +32,8 @@ final class CategoryController extends AbstractController
                 $em->persist($category);
                 $em->flush();
 
+            $this->addFlash('success','La categorie a été ajoute avec succès.');
+
             return $this->redirectToRoute('category_index');
        }
         return $this->render('category/new.html.twig', [
@@ -51,6 +53,8 @@ final class CategoryController extends AbstractController
         
             $em->remove($cat);
             $em->flush();
+
+            $this->addFlash('success','La categorie a été suprimée avec succès.');
 
         return $this->redirectToRoute('category_index');
        
@@ -75,6 +79,7 @@ final class CategoryController extends AbstractController
         if($form->isSubmitted()){
                 $em->flush();
 
+        $this->addFlash('success','La categorie a été modifiée avec succès.');
         return $this->redirectToRoute('category_index');
        }
          return $this->render('category/edit.html.twig', [
