@@ -17,8 +17,12 @@
     
         {% for task in tasks %}
             <div class="list d-flex">
-                <h2>{{task.title}}</h2>
-                <h3>{{task.category.name}}</h3>
+                <h2 class="d-flex align-items-start gap-2">
+                    <span>{{task.title}}</span> 
+                    <span class="badge rounded-pill text-bg-warning fs-6 fst-italic">
+                        {{task.category.name}}
+                    </span>
+                </h2>
                 <form action="/task/complete" method='post'>
                     <label for="">
                         <input type="hidden" name="id" value="{{task.id}}">
