@@ -1,5 +1,16 @@
 {% extends "base.html.twig" %}
 
+{% block stylesheets %}
+    
+    <style>
+        .stroke{
+            text-decoration: line-through;
+            color: green;
+            font-style: italic;
+        }
+    </style>
+{% endblock %}
+
 {% block title %}TASK{% endblock %}
 
 {% block body %}
@@ -16,29 +27,34 @@
 
     
         {% for task in tasks %}
-            <div class="list d-flex">
-                <h2 class="d-flex align-items-start gap-2">
-                    <span>{{task.title}}</span> 
-                    <span class="badge rounded-pill text-bg-warning fs-6 fst-italic">
-                        {{task.category.name}}
-                    </span>
-                </h2>
-                <form action="/task/complete" method='post'>
-                    <label for="">
-                        <input type="hidden" name="id" value="{{task.id}}">
-                        <input type="checkbox" name="isDone" id="" value="{{task.isDone}}" onchange="this.form.submit()">
-                    </label>
-                </form>
-                <form action="{{path('task_delete')}}" 
-                          method="POST"
-                          onsubmit="return confirm('Supprimer??')"
-                          >
-                        <input type="hidden" name="id" value="{{task.id}}">
-                        <button class="p-0 text-danger fs-3 btn"><i class="bi bi-trash-fill">suprimer</i></button>
-                </form>
-                <p>Fait: {{task.isDone ? 'OUI':'NON'}}</p>
-                <p>{{task.createAt | date('d/m/Y')}}</p>
-                <hr><br>
+            <div class="list card">
+               <div class="card-body">
+                    <h2 class="d-flex align-items-start gap-2">
+                        <span class="{{ task.isDone ? 'stroke' : '' }}">{{task.title}}</span> 
+                        <span class="badge rounded-pill text-bg-warning fs-6 fst-italic">
+                            {{task.category.name}}
+                        </span>
+                    </h2>
+                    <form action="/task/complete" method='post'>
+                        
+                        <div class="form-check form-switch">
+                            <input type="hidden" name="id" value="{{task.id}}">
+                            <input class="form-check-input" type="checkbox" name="isDone" id="flexSwitchCheckDefault" value="1"
+                            {{ task.isDone ? 'checked' : '' }} onchange="this.form.submit()">
+                            <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                        </div>
+                    </form>
+                    <p> Fait: {{task.isDone ? 'OUI ':'NON '}}</p>
+                    <p>{{task.createAt | date('d/m/Y')}}</p>
+                    
+                    <form action="{{path('task_delete')}}" 
+                            method="POST"
+                            onsubmit="return confirm('Supprimer??')"
+                            >
+                            <input type="hidden" name="id" value="{{task.id}}">
+                            <button class="p-0 text-danger fs-3 btn"><i class="bi bi-trash-fill">suprimer</i></button>
+                    </form>
+               </div>
             </div>
         {% endfor %}
     </div>

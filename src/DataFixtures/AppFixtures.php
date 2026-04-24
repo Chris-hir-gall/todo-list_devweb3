@@ -2,24 +2,51 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Task;
-use DateTimeImmutable;
+// use App\Entity\Task;
+// use DateTimeImmutable;
+
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+
+    private $hasher;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->hasher = $hasher;
+    }
+
     public function load(ObjectManager $manager): void
     {
         
-        for($i = 0; $i< 10; $i++ ){
-            $task = new Task;
-            $task->setTitle('tache '.($i +1));
-            $task->setIsDone(false);
-            $task->setCreateAt(new DateTimeImmutable());
+        // for($i = 0; $i< 10; $i++ ){
+        //     $task = new Task;
+        //     $task->setTitle('tache '.($i +1));
+        //     $task->setIsDone(false);
+        //     $task->setCreateAt(new DateTimeImmutable());
 
-            $manager->persist($task);
-            $manager->flush();
-        }
+        //     $manager->persist($task);
+        //     $manager->flush();
+        // }
+        $pass = '123456';
+        $user = new User;
+        $user->setEmail('user@test.com');
+        $hashedPassword = $this->hasher->hashPassword($user, $pass);
+        $user->setPassword($hashedPassword);
+
+        $manager->persist($user);
+
+        $admin = new User;
+        $admin->setEmail('admin@test.com');
+        $admin->setPassword($hashedPassword);
+        $admin->setRoles(['ROLE_ADMIN']);
+        $manager->persist($admin);
+
+        $manager->flush();
+
     }
 }
